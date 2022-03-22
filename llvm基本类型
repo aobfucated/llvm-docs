@@ -1,0 +1,10 @@
+IntegerType:
+FuntionType:
+StructType:
+ArrayType:
+VectorType:
+PointerType:
+
+他们都继承于Type类
+
+
