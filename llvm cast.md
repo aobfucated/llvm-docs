@@ -36,3 +36,17 @@ cast(const Y &Val) {
       X, const Y, typename simplify_type<const Y>::SimpleType>::doit(Val);
 }
 ```
+
+
+isa<ClassType>(ClassPointer) 判断Pointer是否是指向ClassType,是的话返回1,否的返回0
+  ```
+  static bool isLoopInvariant(const Value *V, const Loop *L) {
+  if (isa<Constant>(V) || isa<Argument>(V) || isa<GlobalValue>(V))//这三个类都是继承于Value的
+    return true;
+
+  // Otherwise, it must be an instruction...
+  return !L->contains(cast<Instruction>(V)->getParent());//llvm的cast不需要rtti（通过classof的方法实现，具体代码我也没看过），作用应该也是将父类指针转化为子类
+}
+  ```
+
+
