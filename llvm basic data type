@@ -5,6 +5,8 @@ ArrayType:
 VectorType:
 PointerType:
 
-他们都继承于Type类
+他们都继承于Type类(继承图 : https://llvm.org/doxygen/classllvm_1_1Type.html)
+
+
 
 
