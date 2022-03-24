@@ -1,4 +1,7 @@
 ```
+官方文档
+https://llvm.org/docs/ProgrammersManual.html#the-isa-cast-and-dyn-cast-templates
+```
 template<class To, class FromTy> struct cast_convert_val<To,FromTy,FromTy> {
   // This _is_ a simple type, just cast it.
   static typename cast_retty<To, FromTy>::ret_type doit(const FromTy &Val) {
