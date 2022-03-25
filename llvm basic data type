@@ -31,5 +31,11 @@ enum TypeID{
     FixedVectorTyID,   ///< Fixed width SIMD vector type
     ScalableVectorTyID ///< Scalable SIMD vector type
     }
+    
+    
+builder.CreateAlloca返回的全都是PointerType
+
+Type->getScalarType 获取vector中的元素的类型
+Type->getArrayElementType 获取array中的元素的类型
 
 
