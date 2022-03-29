@@ -1,0 +1,12 @@
+为了做到  
+pop rax
+mov xxx,rax
+
+或者mov rax,[rsp+2] sub rsp,2   
+mov rax,[rsp+4],sub rsp,4  
+mov rax,[rax+8],sub rsp,8  
+
+
+也就是获取堆栈上的数,并退栈
+
+在llvm ir阶段如何操作?
