@@ -10,3 +10,8 @@ mov rax,[rax+8],sub rsp,8
 也就是获取堆栈上的数,并退栈
 
 在llvm ir阶段如何操作?
+
+1.如果用read_register这个内在函数的话,可以read rsp，但是引入了内在函数，内在函数在ir阶段优化不了，因为内在函数并不在此module里，也就没办法内联
+
+2._asm mov rcx,rsp    rcx可以function->getArg(0)给搞出来 
+
