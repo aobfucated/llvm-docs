@@ -1,0 +1,3 @@
+release 编译llvm不会触发assert,llvm也会跑下去，并且能正常complie，但是代码是不对的。
+
+最好还是debug先测试一下，再换release
