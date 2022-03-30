@@ -15,3 +15,8 @@ mov rax,[rax+8],sub rsp,8
 
 2._asm mov rcx,rsp    rcx可以function->getArg(0)给搞出来 
 
+function0>getArg(0)返回一个i64类型的，代表rcx,如果CreateIntToPtr给他转换一下的话,对应的是[rcx]
+
+但是我要的是mov x,rcx 或者是add rcx,x sub rcx,x
+
+
