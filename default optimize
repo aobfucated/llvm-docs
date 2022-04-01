@@ -1,0 +1,7 @@
+mov     rax, 1008006FA28230h
+.text:000000000000004D                 mov     [rcx-0Ch], rax
+
+其实是两次 
+mov eax,100800
+mov eax,FA28230
+两次合并了,addPassesToEmitFile有一些默认的优化
