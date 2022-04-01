@@ -51,3 +51,7 @@
 .text:0000000000000069                 add     rsp, 0C0h
 .text:0000000000000070                 retn
 .text:0000000000000070 main            endp
+
+
+
+解决办法将vm-entry单独置一个block
