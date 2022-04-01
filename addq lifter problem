@@ -1,0 +1,53 @@
+.text:0000000000000000 ; int __cdecl main(int argc, const char **argv, const char **envp)
+.text:0000000000000000                 public main
+.text:0000000000000000 main            proc near               ; DATA XREF: .pdata:0000000000000090↓o
+.text:0000000000000000                 sub     rsp, 0C0h  //virtual reg 分配的堆栈
+.text:0000000000000007                 mov     rax, [rcx] //lifter为什么会跑到前面来?理论上是在vm-entry后的
+.text:000000000000000A                 add     [rcx+8], rax
+.text:000000000000000E                 push    0FFFFFFFFC3BB55A6h //我们写的内联汇编 vm-entry
+.text:0000000000000013                 push    0E760D6Dh
+.text:0000000000000018                 push    rbx
+.text:0000000000000019                 push    rsi
+.text:000000000000001A                 push    r13
+.text:000000000000001C                 push    r10
+.text:000000000000001E                 push    r9
+.text:0000000000000020                 push    rdx
+.text:0000000000000021                 push    rcx
+.text:0000000000000022                 push    r11
+.text:0000000000000024                 push    r15
+.text:0000000000000026                 push    r8
+.text:0000000000000028                 push    rbp
+.text:0000000000000029                 push    rdi
+.text:000000000000002A                 push    r12
+.text:000000000000002C                 pushfq
+.text:000000000000002D                 push    r14
+.text:000000000000002F                 push    rax
+.text:0000000000000030                 push    rsp
+.text:0000000000000031                 push    qword ptr ds:21D8h
+.text:0000000000000038                 mov     rax, 0
+.text:000000000000003F                 push    rax
+.text:0000000000000040                 mov     rcx, rsp
+.text:0000000000000043                 mov     qword ptr [rcx], 0  //这是lifter的后一部分，可以看到是被分开了
+.text:000000000000004A                 mov     rsp, rcx
+.text:000000000000004D                 pop     rdx
+.text:000000000000004E                 pop     rbx
+.text:000000000000004F                 pop     r13
+.text:0000000000000051                 pop     rax
+.text:0000000000000052                 pop     r14
+.text:0000000000000054                 popfq
+.text:0000000000000055                 pop     r12
+.text:0000000000000057                 pop     rdi
+.text:0000000000000058                 pop     rbp
+.text:0000000000000059                 pop     r8
+.text:000000000000005B                 pop     r15
+.text:000000000000005D                 pop     r11
+.text:000000000000005F                 pop     rcx
+.text:0000000000000060                 pop     rdx
+.text:0000000000000061                 pop     r9
+.text:0000000000000063                 pop     r10
+.text:0000000000000065                 pop     r13
+.text:0000000000000067                 pop     rsi
+.text:0000000000000068                 pop     rbx
+.text:0000000000000069                 add     rsp, 0C0h
+.text:0000000000000070                 retn
+.text:0000000000000070 main            endp
