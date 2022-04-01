@@ -4,4 +4,4 @@ mov     rax, 1008006FA28230h
 其实是两次 
 mov eax,100800
 mov eax,FA28230
-两次合并了,addPassesToEmitFile有一些默认的优化
+两次写4字节合并成一次写8字节了,addPassesToEmitFile有一些默认的优化
