@@ -1,1 +1,3 @@
+声明为nake的函数,不能带参数
 
+也就是CreateFunction的时候param不能写东西
