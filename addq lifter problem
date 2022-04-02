@@ -1144,3 +1144,17 @@
 .text:0000000000000E6F main            endp
 .text:0000000000000E6F
 .text:0000000000000E6F _text           ends
+
+
+将函数内联反而会又进去参与优化，无语，打乱cfg
+
+	auto block_main = BasicBlock::Create(context, "entry", main);
+			
+			builder.SetInsertPoint(block_main); 
+			auto vm_entry_inst = builder.CreateCall(vm_entry);
+			
+			InlineFunctionInfo ifi;
+			vm_entry_inst->addFnAttr(llvm::Attribute::NoUnwind);
+			vm_entry_inst->addFnAttr(llvm::Attribute::AlwaysInline);
+
+			InlineFunction(*vm_entry_inst, ifi);
