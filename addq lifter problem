@@ -54,4 +54,1093 @@
 
 
 
-解决办法将vm-entry单独置一个block
+解决办法将vm-entry单独置一个block。
+
+用了上面的方法，有两个优化createGVNPass，createCFGSimplificationPass，他也会动block的先后顺序。
+
+*开启了上面两个优化*
+.text:0000000000000000 ; int __cdecl main(int argc, const char **argv, const char **envp)
+.text:0000000000000000                 public main
+.text:0000000000000000 main            proc near               ; DATA XREF: main+C8↓r
+.text:0000000000000000
+.text:0000000000000000 var_98          = qword ptr -98h
+.text:0000000000000000 var_90          = qword ptr -90h
+.text:0000000000000000 var_88          = qword ptr -88h
+.text:0000000000000000 var_80          = qword ptr -80h
+.text:0000000000000000 var_78          = qword ptr -78h
+.text:0000000000000000 var_70          = qword ptr -70h
+.text:0000000000000000 var_68          = qword ptr -68h
+.text:0000000000000000 var_60          = qword ptr -60h
+.text:0000000000000000 var_58          = qword ptr -58h
+.text:0000000000000000 var_50          = qword ptr -50h
+.text:0000000000000000 var_48          = qword ptr -48h
+.text:0000000000000000
+.text:0000000000000000                 push    r15
+.text:0000000000000002                 push    r14
+.text:0000000000000004                 push    r13
+.text:0000000000000006                 push    r12
+.text:0000000000000008                 push    rsi
+.text:0000000000000009                 push    rdi
+.text:000000000000000A                 push    rbp
+.text:000000000000000B                 push    rbx
+.text:000000000000000C                 sub     rsp, 58h
+.text:0000000000000010                 mov     rax, [rcx]
+.text:0000000000000013                 mov     [rsp+98h+var_48], rax 
+.text:0000000000000018                 mov     rsi, [rcx+8] //
+.text:000000000000001C                 mov     qword ptr [rcx], 0
+.text:0000000000000023                 mov     r8, [rcx+18h]
+.text:0000000000000027                 mov     rax, [rcx+20h]
+.text:000000000000002B                 mov     [rsp+98h+var_50], rax
+.text:0000000000000030                 mov     rdx, [rcx+28h]
+.text:0000000000000034                 mov     rax, [rcx+30h]
+.text:0000000000000038                 mov     [rsp+98h+var_58], rax
+.text:000000000000003D                 mov     rbx, [rcx+38h]
+.text:0000000000000041                 mov     rax, [rcx+40h]
+.text:0000000000000045                 mov     [rsp+98h+var_68], rax
+.text:000000000000004A                 mov     rax, [rcx+48h]
+.text:000000000000004E                 mov     [rsp+98h+var_60], rax
+.text:0000000000000053                 mov     rax, [rcx+50h]
+.text:0000000000000057                 mov     [rsp+98h+var_78], rax
+.text:000000000000005C                 mov     r12, [rcx+58h]
+.text:0000000000000060                 mov     [rsp+98h+var_98], r12
+.text:0000000000000064                 mov     rbp, [rcx+60h]
+.text:0000000000000068                 mov     r15, [rcx+70h]
+.text:000000000000006C                 mov     rax, [rcx+78h]
+.text:0000000000000070                 mov     [rsp+98h+var_70], rax
+.text:0000000000000075                 mov     r14, [rcx+80h]
+.text:000000000000007C                 mov     [rsp+98h+var_90], r14
+.text:0000000000000081                 mov     r11, [rcx+88h]
+.text:0000000000000088                 mov     rax, [rcx+90h]
+.text:000000000000008F                 mov     [rcx+0A0h], rdx
+.text:0000000000000096                 mov     [rcx+98h], r8
+.text:000000000000009D                 mov     [rcx+90h], rbp
+.text:00000000000000A4                 mov     [rcx+80h], rax
+.text:00000000000000AB                 mov     qword ptr [rcx+7Ch], 0
+.text:00000000000000B3                 mov     qword ptr [rcx+88h], 0
+.text:00000000000000BE                 mov     dword ptr [rcx+84h], 0
+.text:00000000000000C8                 mov     eax, dword ptr ds:main
+.text:00000000000000CF                 mov     [rcx+8Ch], eax
+.text:00000000000000D5                 mov     rax, 10080000000000h
+.text:00000000000000DF                 mov     [rcx+94h], rax
+.text:00000000000000E6                 mov     eax, [rax]
+.text:00000000000000E8                 mov     [rcx+98h], eax
+.text:00000000000000EE                 mov     rax, 6FA2823000000000h
+.text:00000000000000F8                 mov     [rcx+0A0h], rax
+.text:00000000000000FF                 mov     qword ptr [rcx+0B0h], 0
+.text:000000000000010A                 mov     dword ptr [rcx+0ACh], 0
+.text:0000000000000114                 mov     dword ptr [rcx+0B8h], 20020h
+.text:000000000000011E                 mov     dword ptr [rcx+0C4h], 0
+.text:0000000000000128                 mov     eax, [rcx+0C8h]
+.text:000000000000012E                 mov     dword ptr [rcx+0C8h], 0
+.text:0000000000000138                 mov     [rcx+0C4h], eax
+.text:000000000000013E                 mov     rdx, [rcx+0C4h]
+.text:0000000000000145                 mov     edx, [rdx]
+.text:0000000000000147                 mov     [rcx+0C8h], edx
+.text:000000000000014D                 mov     dword ptr [rcx+0D4h], 282ACAF5h
+.text:0000000000000157                 mov     [rcx+0D0h], eax
+.text:000000000000015D                 mov     dword ptr [rcx+0CCh], 206h
+.text:0000000000000167                 mov     dword ptr [rcx+0C8h], 0
+.text:0000000000000171                 mov     rax, [rcx+0C8h]
+.text:0000000000000178                 mov     eax, [rax]
+.text:000000000000017A                 mov     [rcx+0CCh], eax
+.text:0000000000000180                 mov     dword ptr [rcx+0D8h], 100000h
+.text:000000000000018A                 mov     dword ptr [rcx+0D4h], 0
+.text:0000000000000194                 mov     qword ptr [rcx+0E0h], 0
+.text:000000000000019F                 mov     qword ptr [rcx+0D8h], 206h
+.text:00000000000001AA                 mov     qword ptr [rcx+0E0h], 206h
+.text:00000000000001B5                 mov     qword ptr [rcx+0D8h], 0
+.text:00000000000001C0                 mov     dword ptr [rcx+0F8h], 0
+.text:00000000000001CA                 mov     qword ptr [rcx+0F0h], 206h
+.text:00000000000001D5                 mov     [rcx+0E8h], rsi
+.text:00000000000001DC                 mov     rax, [rcx+108h]
+.text:00000000000001E3                 mov     edx, [rcx+108h]
+.text:00000000000001E9                 mov     [rcx+10Ch], edx
+.text:00000000000001EF                 mov     rdx, [rcx+10Ch]
+.text:00000000000001F6                 add     rdx, rsi
+.text:00000000000001F9                 mov     [rcx+10Ch], rdx
+.text:0000000000000200                 mov     qword ptr [rcx+104h], 0
+.text:000000000000020B                 mov     rbp, [rcx+124h]
+.text:0000000000000212                 add     [rcx+12Ch], rbp
+.text:0000000000000219                 mov     [rcx+124h], rax
+.text:0000000000000220                 mov     rax, [rcx+140h]
+.text:0000000000000227                 add     rax, [rcx+138h]
+.text:000000000000022E                 mov     [rcx+140h], rax
+.text:0000000000000235                 mov     qword ptr [rcx+138h], 0
+.text:0000000000000240                 mov     [rcx+144h], eax
+.text:0000000000000246                 mov     rbp, [rcx+144h]
+.text:000000000000024D                 mov     [rcx+148h], rbp
+.text:0000000000000254                 add     rbp, [rcx+150h]
+.text:000000000000025B                 mov     [rcx+150h], rbp
+.text:0000000000000262                 mov     qword ptr [rcx+148h], 0
+.text:000000000000026D                 mov     r8, [rcx+158h]
+.text:0000000000000274                 mov     qword ptr [rcx+158h], 0
+.text:000000000000027F                 mov     [rcx+150h], rdx
+.text:0000000000000286                 mov     rdx, [rcx+168h]
+.text:000000000000028D                 mov     edi, [rcx+168h]
+.text:0000000000000293                 mov     [rcx+16Ch], edi
+.text:0000000000000299                 mov     rdi, [rcx+17Ch]
+.text:00000000000002A0                 add     [rcx+184h], rdi
+.text:00000000000002A7                 mov     [rcx+17Ch], rdx
+.text:00000000000002AE                 mov     rdx, [rcx+198h]
+.text:00000000000002B5                 add     rdx, [rcx+190h]
+.text:00000000000002BC                 mov     [rcx+198h], rdx
+.text:00000000000002C3                 mov     qword ptr [rcx+190h], 0
+.text:00000000000002CE                 mov     [rcx+19Ch], edx
+.text:00000000000002D4                 mov     rdx, [rcx+19Ch]
+.text:00000000000002DB                 mov     [rcx+1A8h], rbp
+.text:00000000000002E2                 mov     [rcx+1A0h], rbp
+.text:00000000000002E9                 mov     rbp, [rcx+1B0h]
+.text:00000000000002F0                 add     [rcx+1B8h], rbp
+.text:00000000000002F7                 mov     qword ptr [rcx+1B0h], 0
+.text:0000000000000302                 mov     [rcx+1B8h], rdx
+.text:0000000000000309                 add     rdx, [rcx+1C0h]
+.text:0000000000000310                 xorps   xmm0, xmm0
+.text:0000000000000313                 movups  xmmword ptr [rcx+1B8h], xmm0
+.text:000000000000031A                 mov     r10, [rcx+1C8h]
+.text:0000000000000321                 mov     [rcx+1C8h], rdx
+.text:0000000000000328                 mov     rdx, [rcx+1E0h]
+.text:000000000000032F                 add     rdx, [rcx+1D8h]
+.text:0000000000000336                 mov     [rcx+1E0h], rdx
+.text:000000000000033D                 mov     qword ptr [rcx+1D8h], 0
+.text:0000000000000348                 mov     ebp, [rcx+1E8h]
+.text:000000000000034E                 mov     [rcx+1E4h], rdx
+.text:0000000000000355                 mov     [rcx+1DCh], rdx
+.text:000000000000035C                 mov     r9, [rcx+1ECh]
+.text:0000000000000363                 add     r8, r9
+.text:0000000000000366                 mov     [rcx+1D4h], r8
+.text:000000000000036D                 lea     rdi, [r10+r8]
+.text:0000000000000371                 mov     [rsp+98h+var_80], r10
+.text:0000000000000376                 mov     [rcx+1E4h], rdi
+.text:000000000000037D                 mov     qword ptr [rcx+1DCh], 0
+.text:0000000000000388                 mov     [rcx+1ECh], rdi
+.text:000000000000038F                 mov     rdi, [rcx+1FCh]
+.text:0000000000000396                 add     rdi, [rcx+1F4h]
+.text:000000000000039D                 mov     [rcx+1FCh], rdi
+.text:00000000000003A4                 mov     r13d, 981181CDh
+.text:00000000000003AA                 mov     [rcx+1FCh], r13
+.text:00000000000003B1                 mov     [rcx+1F4h], rdi
+.text:00000000000003B8                 mov     r13, [rcx+204h]
+.text:00000000000003BF                 mov     rdx, [rcx+20Ch]
+.text:00000000000003C6                 lea     rax, [rdx+r13]
+.text:00000000000003CA                 mov     [rcx+20Ch], rax
+.text:00000000000003D1                 mov     qword ptr [rcx+204h], 0
+.text:00000000000003DC                 mov     [rcx+21Ch], rax
+.text:00000000000003E3                 mov     edx, [rdx+r13]
+.text:00000000000003E7                 mov     [rcx+220h], edx
+.text:00000000000003ED                 mov     rdx, 9811818D67EE7E32h
+.text:00000000000003F7                 mov     [rcx+224h], rdx
+.text:00000000000003FE                 mov     [rcx+224h], eax
+.text:0000000000000404                 mov     rax, [rcx+234h]
+.text:000000000000040B                 mov     [rsp+98h+var_88], r15
+.text:0000000000000410                 mov     [rcx+234h], r15
+.text:0000000000000417                 mov     [rcx+22Ch], rax
+.text:000000000000041E                 mov     rax, [rsp+98h+var_68]
+.text:0000000000000423                 mov     [rcx+224h], rax
+.text:000000000000042A                 mov     [rcx+21Ch], r8
+.text:0000000000000431                 mov     [rcx+214h], rdi
+.text:0000000000000438                 mov     [rcx+20Ch], rbp
+.text:000000000000043F                 mov     [rcx+204h], r9
+.text:0000000000000446                 mov     rax, [rsp+98h+var_70]
+.text:000000000000044B                 mov     [rcx+1FCh], rax
+.text:0000000000000452                 mov     [rcx+1F4h], r14
+.text:0000000000000459                 mov     [rcx+1ECh], rbx
+.text:0000000000000460                 mov     r14, r11
+.text:0000000000000463                 mov     [rcx+1E4h], r11
+.text:000000000000046A                 mov     [rcx+1DCh], r12
+.text:0000000000000471                 mov     rdx, [rsp+98h+var_58]
+.text:0000000000000476                 mov     [rcx+1D4h], rdx
+.text:000000000000047D                 mov     [rcx+1CCh], r10
+.text:0000000000000484                 mov     rax, [rsp+98h+var_60]
+.text:0000000000000489                 mov     [rcx+1C4h], rax
+.text:0000000000000490                 mov     r11, [rsp+98h+var_78]
+.text:0000000000000495                 mov     [rcx+1BCh], r11
+.text:000000000000049C                 mov     r10, [rsp+98h+var_50]
+.text:00000000000004A1                 mov     [rcx+1B4h], r10
+.text:00000000000004A8                 mov     [rcx+1ACh], r15
+.text:00000000000004AF                 mov     [rcx+1A4h], rbp
+.text:00000000000004B6                 mov     [rcx+19Ch], rsi
+.text:00000000000004BD                 add     rsi, 5C00D5F5h
+.text:00000000000004C4                 mov     [rcx+19Ch], rsi
+.text:00000000000004CB                 mov     r8, [rsp+98h+var_48]
+.text:00000000000004D0                 mov     [rcx+194h], r8
+.text:00000000000004D7                 mov     qword ptr [rcx+18Ch], 0
+.text:00000000000004E2                 mov     eax, [r9]
+.text:00000000000004E5                 mov     [rcx+208h], eax
+.text:00000000000004EB                 mov     [rcx+210h], r9d
+.text:00000000000004F2                 mov     dword ptr [rcx+20Ch], 97C5350Ah
+.text:00000000000004FC                 mov     r12, [rcx+21Ch]
+.text:0000000000000503                 mov     r13, [rcx+234h]
+.text:000000000000050A                 mov     rdi, [rcx+24Ch]
+.text:0000000000000511                 mov     rsi, [rcx+254h]
+.text:0000000000000518                 mov     rax, [rcx+25Ch]
+.text:000000000000051F                 mov     r15, [rcx+264h]
+.text:0000000000000526                 mov     r9, [rcx+26Ch]
+.text:000000000000052D                 mov     qword ptr [rcx+26Ch], 0
+.text:0000000000000538                 mov     [rcx+264h], rdi
+.text:000000000000053F                 mov     rdi, [rsp+98h+var_98]
+.text:0000000000000543                 mov     [rcx+25Ch], rdi
+.text:000000000000054A                 mov     [rcx+254h], rbx
+.text:0000000000000551                 mov     rdi, [rsp+98h+var_90]
+.text:0000000000000556                 mov     [rcx+24Ch], rdi
+.text:000000000000055D                 mov     [rcx+244h], rbp
+.text:0000000000000564                 mov     [rcx+23Ch], rsi
+.text:000000000000056B                 mov     [rcx+234h], rax
+.text:0000000000000572                 mov     rax, rdx
+.text:0000000000000575                 mov     [rcx+22Ch], rdx
+.text:000000000000057C                 mov     [rcx+224h], r10
+.text:0000000000000583                 mov     [rcx+21Ch], r11
+.text:000000000000058A                 mov     [rcx+214h], r13
+.text:0000000000000591                 mov     [rcx+20Ch], r14
+.text:0000000000000598                 mov     rdx, [rsp+98h+var_80]
+.text:000000000000059D                 mov     [rcx+204h], rdx
+.text:00000000000005A4                 mov     [rcx+1FCh], r9
+.text:00000000000005AB                 mov     rdx, [rsp+98h+var_88]
+.text:00000000000005B0                 mov     [rcx+1F4h], rdx
+.text:00000000000005B7                 mov     [rcx+1ECh], r15
+.text:00000000000005BE                 mov     [rcx+1E4h], r12
+.text:00000000000005C5                 mov     [rcx+1DCh], rax
+.text:00000000000005CC                 mov     [rcx+1D4h], r8
+.text:00000000000005D3                 push    0FFFFFFFFC3BB55A6h
+.text:00000000000005D8                 push    0E760D6Dh
+.text:00000000000005DD                 push    rbx
+.text:00000000000005DE                 push    rsi
+.text:00000000000005DF                 push    r13
+.text:00000000000005E1                 push    r10
+.text:00000000000005E3                 push    r9
+.text:00000000000005E5                 push    rdx
+.text:00000000000005E6                 push    rcx
+.text:00000000000005E7                 push    r11
+.text:00000000000005E9                 push    r15
+.text:00000000000005EB                 push    r8
+.text:00000000000005ED                 push    rbp
+.text:00000000000005EE                 push    rdi
+.text:00000000000005EF                 push    r12
+.text:00000000000005F1                 pushfq
+.text:00000000000005F2                 push    r14
+.text:00000000000005F4                 push    rax
+.text:00000000000005F5                 push    rsp
+.text:00000000000005F6                 push    qword ptr ds:21D8h
+.text:00000000000005FD                 mov     rax, 0
+.text:0000000000000604                 push    rax
+.text:0000000000000605                 mov     rcx, rsp
+.text:0000000000000608                 mov     rsp, rcx
+.text:000000000000060B                 pop     rdx
+.text:000000000000060C                 pop     rbx
+.text:000000000000060D                 pop     r13
+.text:000000000000060F                 pop     rax
+.text:0000000000000610                 pop     r14
+.text:0000000000000612                 popfq
+.text:0000000000000613                 pop     r12
+.text:0000000000000615                 pop     rdi
+.text:0000000000000616                 pop     rbp
+.text:0000000000000617                 pop     r8
+.text:0000000000000619                 pop     r15
+.text:000000000000061B                 pop     r11
+.text:000000000000061D                 pop     rcx
+.text:000000000000061E                 pop     rdx
+.text:000000000000061F                 pop     r9
+.text:0000000000000621                 pop     r10
+.text:0000000000000623                 pop     r13
+.text:0000000000000625                 pop     rsi
+.text:0000000000000626                 pop     rbx
+.text:0000000000000627                 add     rsp, 58h
+.text:000000000000062B                 pop     rbx
+.text:000000000000062C                 pop     rbp
+.text:000000000000062D                 pop     rdi
+.text:000000000000062E                 pop     rsi
+.text:000000000000062F                 pop     r12
+.text:0000000000000631                 pop     r13
+.text:0000000000000633                 pop     r14
+.text:0000000000000635                 pop     r15
+.text:0000000000000637                 retn
+.text:0000000000000637 main            endp
+* 不开启 上面两个优化*
+.text:0000000000000000 ; int __cdecl main(int argc, const char **argv, const char **envp)
+.text:0000000000000000                 public main
+.text:0000000000000000 main            proc near
+.text:0000000000000000
+.text:0000000000000000 var_E8          = qword ptr -0E8h
+.text:0000000000000000 var_E0          = qword ptr -0E0h
+.text:0000000000000000 var_D8          = qword ptr -0D8h
+.text:0000000000000000 var_D0          = qword ptr -0D0h
+.text:0000000000000000 var_C8          = qword ptr -0C8h
+.text:0000000000000000 var_C0          = qword ptr -0C0h
+.text:0000000000000000 var_B8          = qword ptr -0B8h
+.text:0000000000000000 var_B0          = qword ptr -0B0h
+.text:0000000000000000 var_A8          = qword ptr -0A8h
+.text:0000000000000000 var_A0          = qword ptr -0A0h
+.text:0000000000000000 var_98          = qword ptr -98h
+.text:0000000000000000 var_90          = qword ptr -90h
+.text:0000000000000000 var_88          = qword ptr -88h
+.text:0000000000000000 var_80          = qword ptr -80h
+.text:0000000000000000 var_78          = qword ptr -78h
+.text:0000000000000000 var_70          = qword ptr -70h
+.text:0000000000000000 var_68          = qword ptr -68h
+.text:0000000000000000 var_60          = qword ptr -60h
+.text:0000000000000000 var_58          = qword ptr -58h
+.text:0000000000000000 var_50          = qword ptr -50h
+.text:0000000000000000 var_48          = qword ptr -48h
+.text:0000000000000000 var_40          = qword ptr -40h
+.text:0000000000000000
+.text:0000000000000000                 push    rbp
+.text:0000000000000001                 push    r15
+.text:0000000000000003                 push    r14
+.text:0000000000000005                 push    r13
+.text:0000000000000007                 push    r12
+.text:0000000000000009                 push    rsi
+.text:000000000000000A                 push    rdi
+.text:000000000000000B                 push    rbx
+.text:000000000000000C                 sub     rsp, 0B8h
+.text:0000000000000013                 lea     rbp, [rsp+80h]
+.text:000000000000001B                 push    0FFFFFFFFC3BB55A6h
+.text:0000000000000020                 push    0E760D6Dh
+.text:0000000000000025                 push    rbx
+.text:0000000000000026                 push    rsi
+.text:0000000000000027                 push    r13
+.text:0000000000000029                 push    r10
+.text:000000000000002B                 push    r9
+.text:000000000000002D                 push    rdx
+.text:000000000000002E                 push    rcx
+.text:000000000000002F                 push    r11
+.text:0000000000000031                 push    r15
+.text:0000000000000033                 push    r8
+.text:0000000000000035                 push    rbp
+.text:0000000000000036                 push    rdi
+.text:0000000000000037                 push    r12
+.text:0000000000000039                 pushfq
+.text:000000000000003A                 push    r14
+.text:000000000000003C                 push    rax
+.text:000000000000003D                 push    rsp
+.text:000000000000003E                 push    qword ptr ds:21D8h
+.text:0000000000000045                 mov     rax, 0
+.text:000000000000004C                 push    rax
+.text:000000000000004D                 mov     rcx, rsp
+.text:0000000000000050                 mov     eax, 10h
+.text:0000000000000055                 call    __chkstk
+.text:000000000000005A                 sub     rsp, rax
+.text:000000000000005D                 mov     [rbp+70h+var_50], rsp
+.text:0000000000000061                 mov     eax, 10h
+.text:0000000000000066                 call    __chkstk
+.text:000000000000006B                 sub     rsp, rax
+.text:000000000000006E                 mov     [rbp+70h+var_B8], rsp
+.text:0000000000000072                 mov     eax, 10h
+.text:0000000000000077                 call    __chkstk
+.text:000000000000007C                 sub     rsp, rax
+.text:000000000000007F                 mov     [rbp+70h+var_48], rsp
+.text:0000000000000083                 mov     eax, 10h
+.text:0000000000000088                 call    __chkstk
+.text:000000000000008D                 sub     rsp, rax
+.text:0000000000000090                 mov     [rbp+70h+var_A8], rsp
+.text:0000000000000094                 mov     eax, 10h
+.text:0000000000000099                 call    __chkstk
+.text:000000000000009E                 sub     rsp, rax
+.text:00000000000000A1                 mov     [rbp+70h+var_60], rsp
+.text:00000000000000A5                 mov     eax, 10h
+.text:00000000000000AA                 call    __chkstk
+.text:00000000000000AF                 sub     rsp, rax
+.text:00000000000000B2                 mov     [rbp+70h+var_C0], rsp
+.text:00000000000000B6                 mov     eax, 10h
+.text:00000000000000BB                 call    __chkstk
+.text:00000000000000C0                 sub     rsp, rax
+.text:00000000000000C3                 mov     [rbp+70h+var_C8], rsp
+.text:00000000000000C7                 mov     eax, 10h
+.text:00000000000000CC                 call    __chkstk
+.text:00000000000000D1                 sub     rsp, rax
+.text:00000000000000D4                 mov     [rbp+70h+var_68], rsp
+.text:00000000000000D8                 mov     eax, 10h
+.text:00000000000000DD                 call    __chkstk
+.text:00000000000000E2                 sub     rsp, rax
+.text:00000000000000E5                 mov     [rbp+70h+var_98], rsp
+.text:00000000000000E9                 mov     eax, 10h
+.text:00000000000000EE                 call    __chkstk
+.text:00000000000000F3                 sub     rsp, rax
+.text:00000000000000F6                 mov     r12, rsp
+.text:00000000000000F9                 mov     [rbp+70h+var_E0], r12
+.text:00000000000000FD                 mov     eax, 10h
+.text:0000000000000102                 call    __chkstk
+.text:0000000000000107                 sub     rsp, rax
+.text:000000000000010A                 mov     [rbp+70h+var_40], rsp
+.text:000000000000010E                 mov     eax, 10h
+.text:0000000000000113                 call    __chkstk
+.text:0000000000000118                 sub     rsp, rax
+.text:000000000000011B                 mov     rbx, rsp
+.text:000000000000011E                 mov     [rbp+70h+var_D8], rbx
+.text:0000000000000122                 mov     eax, 10h
+.text:0000000000000127                 call    __chkstk
+.text:000000000000012C                 sub     rsp, rax
+.text:000000000000012F                 mov     [rbp+70h+var_78], rsp
+.text:0000000000000133                 mov     eax, 10h
+.text:0000000000000138                 call    __chkstk
+.text:000000000000013D                 sub     rsp, rax
+.text:0000000000000140                 mov     rsi, rsp
+.text:0000000000000143                 mov     [rbp+70h+var_A0], rsi
+.text:0000000000000147                 mov     eax, 10h
+.text:000000000000014C                 call    __chkstk
+.text:0000000000000151                 sub     rsp, rax
+.text:0000000000000154                 mov     r9, rsp
+.text:0000000000000157                 mov     [rbp+70h+var_E8], r9
+.text:000000000000015B                 mov     eax, 10h
+.text:0000000000000160                 call    __chkstk
+.text:0000000000000165                 sub     rsp, rax
+.text:0000000000000168                 mov     [rbp+70h+var_58], rsp
+.text:000000000000016C                 mov     eax, 10h
+.text:0000000000000171                 call    __chkstk
+.text:0000000000000176                 sub     rsp, rax
+.text:0000000000000179                 mov     r10, rsp
+.text:000000000000017C                 mov     [rbp+70h+var_B0], r10
+.text:0000000000000180                 mov     eax, 10h
+.text:0000000000000185                 call    __chkstk
+.text:000000000000018A                 sub     rsp, rax
+.text:000000000000018D                 mov     r8, rsp
+.text:0000000000000190                 mov     eax, 10h
+.text:0000000000000195                 call    __chkstk
+.text:000000000000019A                 sub     rsp, rax
+.text:000000000000019D                 mov     r11, rsp
+.text:00000000000001A0                 mov     [rbp+70h+var_88], r11
+.text:00000000000001A4                 mov     eax, 10h
+.text:00000000000001A9                 call    __chkstk
+.text:00000000000001AE                 sub     rsp, rax
+.text:00000000000001B1                 mov     rdi, rsp
+.text:00000000000001B4                 mov     [rbp+70h+var_D0], rdi
+.text:00000000000001B8                 mov     eax, 10h
+.text:00000000000001BD                 call    __chkstk
+.text:00000000000001C2                 sub     rsp, rax
+.text:00000000000001C5                 mov     [rbp+70h+var_80], rsp
+.text:00000000000001C9                 mov     eax, 10h
+.text:00000000000001CE                 call    __chkstk
+.text:00000000000001D3                 sub     rsp, rax
+.text:00000000000001D6                 mov     r15, rsp
+.text:00000000000001D9                 mov     eax, 10h
+.text:00000000000001DE                 call    __chkstk
+.text:00000000000001E3                 sub     rsp, rax
+.text:00000000000001E6                 mov     r13, rsp
+.text:00000000000001E9                 mov     eax, 10h
+.text:00000000000001EE                 call    __chkstk
+.text:00000000000001F3                 sub     rsp, rax
+.text:00000000000001F6                 mov     rdx, rsp
+.text:00000000000001F9                 mov     [rbp+70h+var_90], rdx
+.text:00000000000001FD                 mov     r14, [rcx]
+.text:0000000000000200                 mov     [r9], r14
+.text:0000000000000203                 mov     qword ptr [rcx], 0
+.text:000000000000020A                 mov     rax, [rcx+8]
+.text:000000000000020E                 mov     [r8], rax
+.text:0000000000000211                 mov     r14, r8
+.text:0000000000000214                 mov     rax, [rcx+10h]
+.text:0000000000000218                 mov     [rdx], rax
+.text:000000000000021B                 mov     rax, [rcx+18h]
+.text:000000000000021F                 mov     [r15], rax
+.text:0000000000000222                 mov     rax, [rcx+20h]
+.text:0000000000000226                 mov     rdx, [rbp+70h+var_A8]
+.text:000000000000022A                 mov     [rdx], rax
+.text:000000000000022D                 mov     rax, [rcx+28h]
+.text:0000000000000231                 mov     r8, [rbp+70h+var_C0]
+.text:0000000000000235                 mov     [r8], rax
+.text:0000000000000238                 mov     rax, [rcx+30h]
+.text:000000000000023C                 mov     [rsi], rax
+.text:000000000000023F                 mov     rax, [rcx+38h]
+.text:0000000000000243                 mov     rsi, [rbp+70h+var_B8]
+.text:0000000000000247                 mov     [rsi], rax
+.text:000000000000024A                 mov     rax, [rcx+40h]
+.text:000000000000024E                 mov     [r10], rax
+.text:0000000000000251                 mov     rax, [rcx+48h]
+.text:0000000000000255                 mov     [r12], rax
+.text:0000000000000259                 mov     rax, [rcx+50h]
+.text:000000000000025D                 mov     rdx, [rbp+70h+var_98]
+.text:0000000000000261                 mov     [rdx], rax
+.text:0000000000000264                 mov     rax, [rcx+58h]
+.text:0000000000000268                 mov     [rbx], rax
+.text:000000000000026B                 mov     rax, [rcx+60h]
+.text:000000000000026F                 mov     r12, [rbp+70h+var_C8]
+.text:0000000000000273                 mov     [r12], rax
+.text:0000000000000277                 mov     rax, [rcx+68h]
+.text:000000000000027B                 mov     r10, [rbp+70h+var_58]
+.text:000000000000027F                 mov     [r10], rax
+.text:0000000000000282                 mov     rax, [rcx+70h]
+.text:0000000000000286                 mov     rdx, [rbp+70h+var_48]
+.text:000000000000028A                 mov     [rdx], rax
+.text:000000000000028D                 mov     rax, [rcx+78h]
+.text:0000000000000291                 mov     rdx, [rbp+70h+var_50]
+.text:0000000000000295                 mov     [rdx], rax
+.text:0000000000000298                 mov     rax, [rcx+80h]
+.text:000000000000029F                 mov     [rdi], rax
+.text:00000000000002A2                 mov     rax, [rcx+88h]
+.text:00000000000002A9                 mov     [r11], rax
+.text:00000000000002AC                 mov     rax, [rcx+90h]
+.text:00000000000002B3                 mov     r11, [rbp+70h+var_60]
+.text:00000000000002B7                 mov     [r11], rax
+.text:00000000000002BA                 mov     rax, [rcx+98h]
+.text:00000000000002C1                 mov     [r13+0], rax
+.text:00000000000002C5                 mov     rax, [r8]
+.text:00000000000002C8                 mov     [rcx+0A0h], rax
+.text:00000000000002CF                 mov     rax, [r15]
+.text:00000000000002D2                 mov     [rcx+98h], rax
+.text:00000000000002D9                 mov     rax, [r12]
+.text:00000000000002DD                 mov     [rcx+90h], rax
+.text:00000000000002E4                 mov     rax, [r10]
+.text:00000000000002E7                 mov     [rcx+88h], rax
+.text:00000000000002EE                 mov     rax, [r11]
+.text:00000000000002F1                 mov     [rcx+80h], rax
+.text:00000000000002F8                 mov     dword ptr [rcx+7Ch], 0
+.text:00000000000002FF                 mov     qword ptr [r15], 0
+.text:0000000000000306                 mov     dword ptr [rcx+7Ch], 0
+.text:000000000000030D                 mov     qword ptr [r15], 0
+.text:0000000000000314                 mov     dword ptr [rcx+7Ch], 0
+.text:000000000000031B                 mov     eax, [rcx+84h]
+.text:0000000000000321                 mov     [r11], rax
+.text:0000000000000324                 mov     eax, [rcx+88h]
+.text:000000000000032A                 mov     [r15], rax
+.text:000000000000032D                 mov     dword ptr [rcx+88h], 0
+.text:0000000000000337                 mov     qword ptr [r15], 0
+.text:000000000000033E                 mov     dword ptr [rcx+88h], 0
+.text:0000000000000348                 mov     qword ptr [r11], 0
+.text:000000000000034F                 mov     dword ptr [rcx+88h], 0
+.text:0000000000000359                 mov     qword ptr [r12], 0
+.text:0000000000000361                 mov     qword ptr [rcx+84h], 0
+.text:000000000000036C                 mov     eax, [r15]
+.text:000000000000036F                 mov     [rcx+80h], eax
+.text:0000000000000375                 mov     eax, [r15]
+.text:0000000000000378                 mov     [rcx+7Ch], eax
+.text:000000000000037B                 mov     qword ptr [r13+0], 0
+.text:0000000000000383                 mov     eax, [rcx+8Ch]
+.text:0000000000000389                 mov     [r15], rax
+.text:000000000000038C                 mov     dword ptr [rcx+8Ch], 0
+.text:0000000000000396                 mov     eax, [r11]
+.text:0000000000000399                 mov     [rcx+88h], eax
+.text:000000000000039F                 mov     rax, [rcx+88h]
+.text:00000000000003A6                 mov     eax, [rax]
+.text:00000000000003A8                 mov     [rcx+8Ch], eax
+.text:00000000000003AE                 mov     rax, [rcx+8Ch]
+.text:00000000000003B5                 mov     rdx, [rbp+70h+var_40]
+.text:00000000000003B9                 mov     [rdx], rax
+.text:00000000000003BC                 mov     rax, [rcx+94h]
+.text:00000000000003C3                 mov     rdi, [rbp+70h+var_68]
+.text:00000000000003C7                 mov     [rdi], rax
+.text:00000000000003CA                 mov     dword ptr [rcx+98h], 100800h
+.text:00000000000003D4                 mov     eax, [r12]
+.text:00000000000003D8                 mov     [rcx+94h], eax
+.text:00000000000003DE                 mov     rax, [rcx+94h]
+.text:00000000000003E5                 mov     eax, [rax]
+.text:00000000000003E7                 mov     [rcx+98h], eax
+.text:00000000000003ED                 mov     rax, [rcx+0A0h]
+.text:00000000000003F4                 mov     [rdx], rax
+.text:00000000000003F7                 mov     dword ptr [rcx+0A4h], 6FA28230h
+.text:0000000000000401                 mov     eax, [r12]
+.text:0000000000000405                 mov     [rcx+0A0h], eax
+.text:000000000000040B                 mov     rax, [rcx+0A0h]
+.text:0000000000000412                 mov     [rdx], rax
+.text:0000000000000415                 mov     rax, [rcx+0A8h]
+.text:000000000000041C                 mov     [rdx], rax
+.text:000000000000041F                 mov     dword ptr [rcx+0B0h], 100800h
+.text:0000000000000429                 mov     qword ptr [r12], 100800h
+.text:0000000000000431                 mov     eax, [rcx+0B4h]
+.text:0000000000000437                 mov     [r11], rax
+.text:000000000000043A                 mov     dword ptr [rcx+0B4h], 0
+.text:0000000000000444                 mov     qword ptr [r11], 0
+.text:000000000000044B                 mov     dword ptr [rcx+0B4h], 0
+.text:0000000000000455                 mov     qword ptr [r15], 0
+.text:000000000000045C                 mov     dword ptr [rcx+0B4h], 0
+.text:0000000000000466                 mov     eax, [r15]
+.text:0000000000000469                 mov     [rcx+0B0h], eax
+.text:000000000000046F                 mov     eax, [r15]
+.text:0000000000000472                 mov     [rcx+0ACh], eax
+.text:0000000000000478                 mov     rax, [rcx+0ACh]
+.text:000000000000047F                 mov     [rdx], rax
+.text:0000000000000482                 mov     rax, [rcx+0B4h]
+.text:0000000000000489                 mov     [rdx], rax
+.text:000000000000048C                 mov     dword ptr [rcx+0B8h], 20020h
+.text:0000000000000496                 mov     eax, [r15]
+.text:0000000000000499                 mov     [rcx+0B4h], eax
+.text:000000000000049F                 mov     rax, [rcx+0B4h]
+.text:00000000000004A6                 mov     [rdx], rax
+.text:00000000000004A9                 mov     eax, [rcx+0C4h]
+.text:00000000000004AF                 mov     [r15], rax
+.text:00000000000004B2                 mov     dword ptr [rcx+0C4h], 0
+.text:00000000000004BC                 mov     qword ptr [r15], 0
+.text:00000000000004C3                 mov     eax, [rcx+0C8h]
+.text:00000000000004C9                 mov     [r10], rax
+.text:00000000000004CC                 mov     dword ptr [rcx+0C8h], 0
+.text:00000000000004D6                 mov     [rcx+0C4h], eax
+.text:00000000000004DC                 mov     rax, [rcx+0C4h]
+.text:00000000000004E3                 mov     eax, [rax]
+.text:00000000000004E5                 mov     [rcx+0C8h], eax
+.text:00000000000004EB                 mov     rax, [rcx+0C8h]
+.text:00000000000004F2                 mov     [rdi], rax
+.text:00000000000004F5                 mov     rax, [rcx+0D0h]
+.text:00000000000004FC                 mov     [rdx], rax
+.text:00000000000004FF                 mov     dword ptr [rcx+0D4h], 282ACAF5h
+.text:0000000000000509                 mov     eax, [r10]
+.text:000000000000050C                 mov     [rcx+0D0h], eax
+.text:0000000000000512                 mov     dword ptr [rcx+0CCh], 206h
+.text:000000000000051C                 mov     eax, [r11]
+.text:000000000000051F                 mov     [rcx+0C8h], eax
+.text:0000000000000525                 mov     rax, [rcx+0C8h]
+.text:000000000000052C                 mov     eax, [rax]
+.text:000000000000052E                 mov     [rcx+0CCh], eax
+.text:0000000000000534                 mov     rax, [rcx+0CCh]
+.text:000000000000053B                 mov     [r13+0], rax
+.text:000000000000053F                 mov     rax, [rcx+0D4h]
+.text:0000000000000546                 mov     [rdi], rax
+.text:0000000000000549                 mov     dword ptr [rcx+0D8h], 100000h
+.text:0000000000000553                 mov     eax, [r11]
+.text:0000000000000556                 mov     [rcx+0D4h], eax
+.text:000000000000055C                 mov     rax, [rcx+0D4h]
+.text:0000000000000563                 mov     [rdx], rax
+.text:0000000000000566                 mov     rax, [rcx+0DCh]
+.text:000000000000056D                 mov     [rdi], rax
+.text:0000000000000570                 mov     eax, [rcx+0E4h]
+.text:0000000000000576                 mov     [r11], rax
+.text:0000000000000579                 mov     dword ptr [rcx+0E4h], 206h
+.text:0000000000000583                 mov     qword ptr [r11], 206h
+.text:000000000000058A                 mov     rax, [r15]
+.text:000000000000058D                 mov     [rcx+0E0h], rax
+.text:0000000000000594                 add     rax, [r11]
+.text:0000000000000597                 mov     rsi, r11
+.text:000000000000059A                 mov     [rcx+0E0h], rax
+.text:00000000000005A1                 mov     qword ptr [rcx+0D8h], 0
+.text:00000000000005AC                 mov     qword ptr [r13+0], 0
+.text:00000000000005B4                 mov     rax, [rcx+0E0h]
+.text:00000000000005BB                 mov     [rdx], rax
+.text:00000000000005BE                 mov     rax, [rcx+0E8h]
+.text:00000000000005C5                 mov     [r13+0], rax
+.text:00000000000005C9                 mov     rax, [rcx+0F0h]
+.text:00000000000005D0                 mov     [r13+0], rax
+.text:00000000000005D4                 mov     eax, [rcx+0F8h]
+.text:00000000000005DA                 mov     [r10], rax
+.text:00000000000005DD                 mov     dword ptr [rcx+0F8h], 0
+.text:00000000000005E7                 mov     r11, r14
+.text:00000000000005EA                 mov     rax, [r14]
+.text:00000000000005ED                 mov     [rcx+0F0h], rax
+.text:00000000000005F4                 mov     rax, [rdx]
+.text:00000000000005F7                 mov     [rcx+0F0h], rax
+.text:00000000000005FE                 mov     rax, [rdx]
+.text:0000000000000601                 mov     [rcx+0E8h], rax
+.text:0000000000000608                 mov     [r13+0], rax
+.text:000000000000060C                 mov     rax, [rcx+0F0h]
+.text:0000000000000613                 mov     [r13+0], rax
+.text:0000000000000617                 mov     rax, [rdx]
+.text:000000000000061A                 mov     r14, rdx
+.text:000000000000061D                 mov     [rcx+0F0h], rax
+.text:0000000000000624                 mov     rbx, [r11]
+.text:0000000000000627                 mov     r9, r11
+.text:000000000000062A                 mov     [rbp+70h+var_70], r11
+.text:000000000000062E                 mov     [rcx+0E8h], rbx
+.text:0000000000000635                 mov     [rsi], rax
+.text:0000000000000638                 mov     rax, [rcx+0F8h]
+.text:000000000000063F                 mov     r11, [rbp+70h+var_78]
+.text:0000000000000643                 mov     [r11], rax
+.text:0000000000000646                 mov     [rcx+0F8h], rax
+.text:000000000000064D                 mov     rax, [rcx+100h]
+.text:0000000000000654                 mov     [rdx], rax
+.text:0000000000000657                 mov     [rcx+100h], rax
+.text:000000000000065E                 mov     [rdi], rax
+.text:0000000000000661                 mov     rax, [rcx+108h]
+.text:0000000000000668                 mov     [r13+0], rax
+.text:000000000000066C                 mov     [rcx+108h], rax
+.text:0000000000000673                 mov     ebx, eax
+.text:0000000000000675                 mov     [rdx], rbx
+.text:0000000000000678                 mov     ebx, [rcx+10Ch]
+.text:000000000000067E                 mov     [rdi], rbx
+.text:0000000000000681                 mov     [rcx+10Ch], eax
+.text:0000000000000687                 mov     rax, [rcx+10Ch]
+.text:000000000000068E                 add     rax, [r9]
+.text:0000000000000691                 mov     [rcx+10Ch], rax
+.text:0000000000000698                 mov     qword ptr [rcx+104h], 0
+.text:00000000000006A3                 mov     [rdi], rax
+.text:00000000000006A6                 mov     rax, [rcx+11Ch]
+.text:00000000000006AD                 mov     [r15], rax
+.text:00000000000006B0                 mov     rax, [rcx+124h]
+.text:00000000000006B7                 add     [rcx+12Ch], rax
+.text:00000000000006BE                 mov     qword ptr [rcx+124h], 0
+.text:00000000000006C9                 mov     qword ptr [r8], 0
+.text:00000000000006D0                 mov     rax, [r13+0]
+.text:00000000000006D4                 mov     [rcx+124h], rax
+.text:00000000000006DB                 mov     eax, eax
+.text:00000000000006DD                 mov     [r15], rax
+.text:00000000000006E0                 mov     rax, [rcx+128h]
+.text:00000000000006E7                 mov     [r15], rax
+.text:00000000000006EA                 mov     rax, [rcx+140h]
+.text:00000000000006F1                 add     rax, [rcx+138h]
+.text:00000000000006F8                 mov     [rcx+140h], rax
+.text:00000000000006FF                 mov     qword ptr [rcx+138h], 0
+.text:000000000000070A                 mov     ebx, eax
+.text:000000000000070C                 mov     [rdx], rbx
+.text:000000000000070F                 mov     [rcx+144h], eax
+.text:0000000000000715                 mov     rax, [rcx+144h]
+.text:000000000000071C                 mov     [r15], rax
+.text:000000000000071F                 add     [rcx+150h], rax
+.text:0000000000000726                 mov     qword ptr [rcx+148h], 0
+.text:0000000000000731                 mov     qword ptr [r8], 0
+.text:0000000000000738                 mov     rax, [rcx+150h]
+.text:000000000000073F                 mov     r9, [rbp+70h+var_80]
+.text:0000000000000743                 mov     [r9], rax
+.text:0000000000000746                 mov     rax, [rcx+158h]
+.text:000000000000074D                 mov     [r11], rax
+.text:0000000000000750                 mov     rax, [r8]
+.text:0000000000000753                 mov     [rcx+158h], rax
+.text:000000000000075A                 mov     rax, [rdi]
+.text:000000000000075D                 mov     [rcx+150h], rax
+.text:0000000000000764                 mov     [r15], rax
+.text:0000000000000767                 mov     rax, [rcx+158h]
+.text:000000000000076E                 mov     [rsi], rax
+.text:0000000000000771                 mov     rax, [rcx+160h]
+.text:0000000000000778                 mov     [rdi], rax
+.text:000000000000077B                 mov     rax, [rcx+168h]
+.text:0000000000000782                 mov     [r13+0], rax
+.text:0000000000000786                 mov     rax, [r8]
+.text:0000000000000789                 mov     [rcx+168h], rax
+.text:0000000000000790                 mov     [rdi], rax
+.text:0000000000000793                 mov     rax, [r13+0]
+.text:0000000000000797                 mov     [rcx+168h], rax
+.text:000000000000079E                 mov     ebx, eax
+.text:00000000000007A0                 mov     [rdx], rbx
+.text:00000000000007A3                 mov     ebx, [rcx+16Ch]
+.text:00000000000007A9                 mov     [r15], rbx
+.text:00000000000007AC                 mov     [rcx+16Ch], eax
+.text:00000000000007B2                 mov     rax, [rcx+16Ch]
+.text:00000000000007B9                 mov     [r15], rax
+.text:00000000000007BC                 mov     rax, [rcx+17Ch]
+.text:00000000000007C3                 add     [rcx+184h], rax
+.text:00000000000007CA                 mov     qword ptr [rcx+17Ch], 0
+.text:00000000000007D5                 mov     rax, [r13+0]
+.text:00000000000007D9                 mov     [rcx+17Ch], rax
+.text:00000000000007E0                 mov     eax, eax
+.text:00000000000007E2                 mov     [rsi], rax
+.text:00000000000007E5                 mov     rax, [rcx+188h]
+.text:00000000000007EC                 mov     [rdi], rax
+.text:00000000000007EF                 mov     rax, [rcx+198h]
+.text:00000000000007F6                 add     rax, [rcx+190h]
+.text:00000000000007FD                 mov     [rcx+198h], rax
+.text:0000000000000804                 mov     qword ptr [rcx+190h], 0
+.text:000000000000080F                 mov     ebx, eax
+.text:0000000000000811                 mov     [rdx], rbx
+.text:0000000000000814                 mov     ebx, [rcx+19Ch]
+.text:000000000000081A                 mov     [rsi], rbx
+.text:000000000000081D                 mov     [rcx+19Ch], eax
+.text:0000000000000823                 mov     rax, [rcx+19Ch]
+.text:000000000000082A                 mov     rdx, [rbp+70h+var_90]
+.text:000000000000082E                 mov     [rdx], rax
+.text:0000000000000831                 mov     eax, [rcx+1A4h]
+.text:0000000000000837                 mov     [r13+0], rax
+.text:000000000000083B                 mov     rax, [rcx+1A8h]
+.text:0000000000000842                 mov     [r15], rax
+.text:0000000000000845                 mov     rax, [r9]
+.text:0000000000000848                 mov     [rcx+1A8h], rax
+.text:000000000000084F                 mov     [rcx+1A0h], rax
+.text:0000000000000856                 mov     [r13+0], rax
+.text:000000000000085A                 mov     rax, [rcx+1A8h]
+.text:0000000000000861                 mov     [r15], rax
+.text:0000000000000864                 mov     rax, [rcx+1B0h]
+.text:000000000000086B                 add     [rcx+1B8h], rax
+.text:0000000000000872                 mov     qword ptr [rcx+1B0h], 0
+.text:000000000000087D                 mov     qword ptr [r13+0], 0
+.text:0000000000000885                 mov     rax, [rcx+1B8h]
+.text:000000000000088C                 mov     [r13+0], rax
+.text:0000000000000890                 mov     rax, [rdx]
+.text:0000000000000893                 add     [rcx+1C0h], rax
+.text:000000000000089A                 mov     qword ptr [rcx+1B8h], 0
+.text:00000000000008A5                 mov     qword ptr [r8], 0
+.text:00000000000008AC                 mov     rax, [rcx+1C0h]
+.text:00000000000008B3                 mov     [r15], rax
+.text:00000000000008B6                 mov     rax, [rcx+1C8h]
+.text:00000000000008BD                 mov     [r9], rax
+.text:00000000000008C0                 mov     rax, [r8]
+.text:00000000000008C3                 mov     [rcx+1C8h], rax
+.text:00000000000008CA                 mov     rax, [r8]
+.text:00000000000008CD                 mov     [rcx+1C0h], rax
+.text:00000000000008D4                 mov     [r13+0], rax
+.text:00000000000008D8                 mov     rax, [rcx+1C8h]
+.text:00000000000008DF                 mov     [rsi], rax
+.text:00000000000008E2                 mov     rax, [r15]
+.text:00000000000008E5                 mov     [rcx+1C8h], rax
+.text:00000000000008EC                 mov     [rsi], rax
+.text:00000000000008EF                 mov     rax, [rcx+1D0h]
+.text:00000000000008F6                 mov     [r13+0], rax
+.text:00000000000008FA                 mov     rax, [rcx+1D8h]
+.text:0000000000000901                 add     [rcx+1E0h], rax
+.text:0000000000000908                 mov     qword ptr [rcx+1D8h], 0
+.text:0000000000000913                 mov     qword ptr [rdi], 0
+.text:000000000000091A                 mov     rax, [rcx+1E0h]
+.text:0000000000000921                 mov     [rdx], rax
+.text:0000000000000924                 mov     eax, [rcx+1E8h]
+.text:000000000000092A                 mov     [r10], rax
+.text:000000000000092D                 mov     rax, [rdx]
+.text:0000000000000930                 mov     [rcx+1E4h], rax
+.text:0000000000000937                 mov     [rdi], rax
+.text:000000000000093A                 mov     [rcx+1E4h], rax
+.text:0000000000000941                 mov     [rcx+1DCh], rax
+.text:0000000000000948                 mov     [r8], rax
+.text:000000000000094B                 mov     rax, [rcx+1ECh]
+.text:0000000000000952                 mov     [r12], rax
+.text:0000000000000956                 add     rax, [r11]
+.text:0000000000000959                 mov     [rcx+1ECh], rax
+.text:0000000000000960                 mov     qword ptr [rcx+1E4h], 0
+.text:000000000000096B                 mov     qword ptr [rsi], 0
+.text:0000000000000972                 mov     rax, [rcx+1ECh]
+.text:0000000000000979                 mov     [rdi], rax
+.text:000000000000097C                 mov     qword ptr [rcx+1ECh], 0
+.text:0000000000000987                 mov     rax, [r9]
+.text:000000000000098A                 mov     [rcx+1E4h], rax
+.text:0000000000000991                 mov     rax, [rdi]
+.text:0000000000000994                 mov     [rcx+1DCh], rax
+.text:000000000000099B                 mov     [rcx+1D4h], rax
+.text:00000000000009A2                 mov     [r8], rax
+.text:00000000000009A5                 mov     rax, [rcx+1DCh]
+.text:00000000000009AC                 add     [rcx+1E4h], rax
+.text:00000000000009B3                 mov     qword ptr [rcx+1DCh], 0
+.text:00000000000009BE                 mov     qword ptr [r8], 0
+.text:00000000000009C5                 mov     rax, [rcx+1E4h]
+.text:00000000000009CC                 mov     [rdx], rax
+.text:00000000000009CF                 mov     rax, [rcx+1ECh]
+.text:00000000000009D6                 mov     [r15], rax
+.text:00000000000009D9                 mov     rax, [r8]
+.text:00000000000009DC                 mov     [rcx+1ECh], rax
+.text:00000000000009E3                 mov     rbx, [r8]
+.text:00000000000009E6                 mov     [rcx+1E4h], rbx
+.text:00000000000009ED                 mov     [r13+0], rax
+.text:00000000000009F1                 mov     rax, [rdx]
+.text:00000000000009F4                 mov     [rcx+1ECh], rax
+.text:00000000000009FB                 mov     [rcx+1E4h], rax
+.text:0000000000000A02                 mov     [rsi], rax
+.text:0000000000000A05                 mov     rax, [rcx+1F4h]
+.text:0000000000000A0C                 add     [rcx+1FCh], rax
+.text:0000000000000A13                 mov     qword ptr [rcx+1F4h], 0
+.text:0000000000000A1E                 mov     qword ptr [rsi], 0
+.text:0000000000000A25                 mov     rax, [rcx+1FCh]
+.text:0000000000000A2C                 mov     [r13+0], rax
+.text:0000000000000A30                 mov     eax, 981181CDh
+.text:0000000000000A35                 mov     [rcx+1FCh], rax
+.text:0000000000000A3C                 mov     rax, [r13+0]
+.text:0000000000000A40                 mov     [rcx+1F4h], rax
+.text:0000000000000A47                 mov     [r8], rax
+.text:0000000000000A4A                 mov     rax, [rcx+1FCh]
+.text:0000000000000A51                 mov     [rsi], rax
+.text:0000000000000A54                 mov     rax, [rcx+204h]
+.text:0000000000000A5B                 add     [rcx+20Ch], rax
+.text:0000000000000A62                 mov     qword ptr [rcx+204h], 0
+.text:0000000000000A6D                 mov     qword ptr [r8], 0
+.text:0000000000000A74                 mov     rax, [rcx+20Ch]
+.text:0000000000000A7B                 mov     [rsi], rax
+.text:0000000000000A7E                 mov     rbx, [rcx+21Ch]
+.text:0000000000000A85                 mov     [r15], rbx
+.text:0000000000000A88                 mov     [rcx+21Ch], rax
+.text:0000000000000A8F                 mov     ebx, eax
+.text:0000000000000A91                 mov     [rsi], rbx
+.text:0000000000000A94                 mov     [rcx+21Ch], eax
+.text:0000000000000A9A                 mov     rax, [rcx+21Ch]
+.text:0000000000000AA1                 mov     eax, [rax]
+.text:0000000000000AA3                 mov     [rcx+220h], eax
+.text:0000000000000AA9                 mov     rax, [rcx+220h]
+.text:0000000000000AB0                 mov     [r15], rax
+.text:0000000000000AB3                 mov     dword ptr [rcx+224h], 67EE7E32h
+.text:0000000000000ABD                 mov     rax, [rcx+224h]
+.text:0000000000000AC4                 mov     [r8], rax
+.text:0000000000000AC7                 mov     dword ptr [rcx+228h], 9811818Dh
+.text:0000000000000AD1                 mov     eax, [rsi]
+.text:0000000000000AD3                 mov     [rcx+224h], eax
+.text:0000000000000AD9                 mov     rax, [rcx+224h]
+.text:0000000000000AE0                 mov     [r14], rax
+.text:0000000000000AE3                 mov     rax, [rcx+22Ch]
+.text:0000000000000AEA                 mov     [r15], rax
+.text:0000000000000AED                 mov     rax, [rcx+234h]
+.text:0000000000000AF4                 mov     [r8], rax
+.text:0000000000000AF7                 mov     r14, [rbp+70h+var_48]
+.text:0000000000000AFB                 mov     rax, [r14]
+.text:0000000000000AFE                 mov     [rcx+234h], rax
+.text:0000000000000B05                 mov     rax, [r8]
+.text:0000000000000B08                 mov     [rcx+22Ch], rax
+.text:0000000000000B0F                 mov     rax, [rbp+70h+var_B0]
+.text:0000000000000B13                 mov     rax, [rax]
+.text:0000000000000B16                 mov     [rcx+224h], rax
+.text:0000000000000B1D                 mov     rax, [rdi]
+.text:0000000000000B20                 mov     [rcx+21Ch], rax
+.text:0000000000000B27                 mov     rax, [r13+0]
+.text:0000000000000B2B                 mov     [rcx+214h], rax
+.text:0000000000000B32                 mov     rax, [r10]
+.text:0000000000000B35                 mov     rdi, r10
+.text:0000000000000B38                 mov     [rcx+20Ch], rax
+.text:0000000000000B3F                 mov     rax, [r12]
+.text:0000000000000B43                 mov     [rcx+204h], rax
+.text:0000000000000B4A                 mov     r12, [rbp+70h+var_50]
+.text:0000000000000B4E                 mov     rax, [r12]
+.text:0000000000000B52                 mov     [rcx+1FCh], rax
+.text:0000000000000B59                 mov     rax, [rbp+70h+var_D0]
+.text:0000000000000B5D                 mov     rax, [rax]
+.text:0000000000000B60                 mov     [rcx+1F4h], rax
+.text:0000000000000B67                 mov     rax, [rbp+70h+var_B8]
+.text:0000000000000B6B                 mov     rax, [rax]
+.text:0000000000000B6E                 mov     [rcx+1ECh], rax
+.text:0000000000000B75                 mov     rax, [rbp+70h+var_88]
+.text:0000000000000B79                 mov     rax, [rax]
+.text:0000000000000B7C                 mov     [rcx+1E4h], rax
+.text:0000000000000B83                 mov     r10, [rbp+70h+var_D8]
+.text:0000000000000B87                 mov     rax, [r10]
+.text:0000000000000B8A                 mov     [rcx+1DCh], rax
+.text:0000000000000B91                 mov     rbx, [rbp+70h+var_A0]
+.text:0000000000000B95                 mov     rax, [rbx]
+.text:0000000000000B98                 mov     [rcx+1D4h], rax
+.text:0000000000000B9F                 mov     rax, [r9]
+.text:0000000000000BA2                 mov     [rcx+1CCh], rax
+.text:0000000000000BA9                 mov     rax, [rbp+70h+var_E0]
+.text:0000000000000BAD                 mov     rax, [rax]
+.text:0000000000000BB0                 mov     [rcx+1C4h], rax
+.text:0000000000000BB7                 mov     rax, [rbp+70h+var_98]
+.text:0000000000000BBB                 mov     rax, [rax]
+.text:0000000000000BBE                 mov     [rcx+1BCh], rax
+.text:0000000000000BC5                 mov     r11, [rbp+70h+var_A8]
+.text:0000000000000BC9                 mov     rax, [r11]
+.text:0000000000000BCC                 mov     [rcx+1B4h], rax
+.text:0000000000000BD3                 mov     rax, [r14]
+.text:0000000000000BD6                 mov     [rcx+1ACh], rax
+.text:0000000000000BDD                 mov     rax, [rdi]
+.text:0000000000000BE0                 mov     [rcx+1A4h], rax
+.text:0000000000000BE7                 mov     eax, 5C00D5F5h
+.text:0000000000000BEC                 mov     rdx, [rbp+70h+var_70]
+.text:0000000000000BF0                 add     rax, [rdx]
+.text:0000000000000BF3                 mov     [rcx+19Ch], rax
+.text:0000000000000BFA                 mov     qword ptr [rcx+194h], 0
+.text:0000000000000C05                 mov     r9, [rbp+70h+var_E8]
+.text:0000000000000C09                 mov     rax, [r9]
+.text:0000000000000C0C                 mov     [rcx+194h], rax
+.text:0000000000000C13                 mov     qword ptr [rcx+18Ch], 0
+.text:0000000000000C1E                 mov     rsi, [rbp+70h+var_40]
+.text:0000000000000C22                 mov     [rsi], rax
+.text:0000000000000C25                 mov     rax, [rcx+1A4h]
+.text:0000000000000C2C                 mov     [rdx], rax
+.text:0000000000000C2F                 mov     rax, [rcx+1ACh]
+.text:0000000000000C36                 mov     [r15], rax
+.text:0000000000000C39                 mov     rax, [rcx+1B4h]
+.text:0000000000000C40                 mov     [r12], rax
+.text:0000000000000C44                 mov     rax, [rcx+1BCh]
+.text:0000000000000C4B                 mov     [rbx], rax
+.text:0000000000000C4E                 mov     rax, [rcx+1CCh]
+.text:0000000000000C55                 mov     [rdi], rax
+.text:0000000000000C58                 mov     rax, [rcx+1D4h]
+.text:0000000000000C5F                 mov     [r13+0], rax
+.text:0000000000000C63                 mov     rax, [rcx+1DCh]
+.text:0000000000000C6A                 mov     rdi, [rbp+70h+var_78]
+.text:0000000000000C6E                 mov     [rdi], rax
+.text:0000000000000C71                 mov     rax, [rcx+1E4h]
+.text:0000000000000C78                 mov     [r14], rax
+.text:0000000000000C7B                 mov     rax, [rcx+1ECh]
+.text:0000000000000C82                 mov     [r9], rax
+.text:0000000000000C85                 mov     r12, r9
+.text:0000000000000C88                 mov     rax, [rcx+1F4h]
+.text:0000000000000C8F                 mov     [r10], rax
+.text:0000000000000C92                 mov     r14, r10
+.text:0000000000000C95                 mov     eax, [rcx+204h]
+.text:0000000000000C9B                 mov     rdx, [rbp+70h+var_80]
+.text:0000000000000C9F                 mov     [rdx], rax
+.text:0000000000000CA2                 mov     [rcx+204h], eax
+.text:0000000000000CA8                 mov     rax, [rcx+204h]
+.text:0000000000000CAF                 mov     eax, [rax]
+.text:0000000000000CB1                 mov     [rcx+208h], eax
+.text:0000000000000CB7                 mov     dword ptr [rcx+20Ch], 683ACAF5h
+.text:0000000000000CC1                 mov     eax, [rdx]
+.text:0000000000000CC3                 mov     [rcx+210h], eax
+.text:0000000000000CC9                 mov     dword ptr [rcx+20Ch], 97C5350Ah
+.text:0000000000000CD3                 mov     rax, [rcx+21Ch]
+.text:0000000000000CDA                 mov     rbx, [rbp+70h+var_90]
+.text:0000000000000CDE                 mov     [rbx], rax
+.text:0000000000000CE1                 mov     rax, [rcx+22Ch]
+.text:0000000000000CE8                 mov     [r8], rax
+.text:0000000000000CEB                 mov     rax, [rcx+234h]
+.text:0000000000000CF2                 mov     r9, [rbp+70h+var_88]
+.text:0000000000000CF6                 mov     [r9], rax
+.text:0000000000000CF9                 mov     rax, [rcx+23Ch]
+.text:0000000000000D00                 mov     r10, [rbp+70h+var_60]
+.text:0000000000000D04                 mov     [r10], rax
+.text:0000000000000D07                 mov     rax, [rcx+244h]
+.text:0000000000000D0E                 mov     [r10], rax
+.text:0000000000000D11                 mov     rax, [rcx+24Ch]
+.text:0000000000000D18                 mov     rdx, [rbp+70h+var_B0]
+.text:0000000000000D1C                 mov     [rdx], rax
+.text:0000000000000D1F                 mov     rax, [rcx+254h]
+.text:0000000000000D26                 mov     rsi, [rbp+70h+var_68]
+.text:0000000000000D2A                 mov     [rsi], rax
+.text:0000000000000D2D                 mov     rax, [rcx+25Ch]
+.text:0000000000000D34                 mov     [r10], rax
+.text:0000000000000D37                 mov     rax, [rcx+264h]
+.text:0000000000000D3E                 mov     [r11], rax
+.text:0000000000000D41                 mov     rax, [rcx+26Ch]
+.text:0000000000000D48                 mov     [r8], rax
+.text:0000000000000D4B                 mov     [rcx+26Ch], rax
+.text:0000000000000D52                 mov     rax, [r8]
+.text:0000000000000D55                 mov     [rcx+264h], rax
+.text:0000000000000D5C                 mov     qword ptr [rcx+26Ch], 0
+.text:0000000000000D67                 mov     rax, [rdx]
+.text:0000000000000D6A                 mov     [rcx+264h], rax
+.text:0000000000000D71                 mov     rax, [rdi]
+.text:0000000000000D74                 mov     [rcx+25Ch], rax
+.text:0000000000000D7B                 mov     rax, [r12]
+.text:0000000000000D7F                 mov     [rcx+254h], rax
+.text:0000000000000D86                 mov     rax, [r14]
+.text:0000000000000D89                 mov     [rcx+24Ch], rax
+.text:0000000000000D90                 mov     rax, [rbp+70h+var_70]
+.text:0000000000000D94                 mov     rax, [rax]
+.text:0000000000000D97                 mov     [rcx+244h], rax
+.text:0000000000000D9E                 mov     rax, [rsi]
+.text:0000000000000DA1                 mov     [rcx+23Ch], rax
+.text:0000000000000DA8                 mov     rax, [r10]
+.text:0000000000000DAB                 mov     [rcx+234h], rax
+.text:0000000000000DB2                 mov     rax, [r13+0]
+.text:0000000000000DB6                 mov     [rcx+22Ch], rax
+.text:0000000000000DBD                 mov     rax, [rbp+70h+var_50]
+.text:0000000000000DC1                 mov     rax, [rax]
+.text:0000000000000DC4                 mov     [rcx+224h], rax
+.text:0000000000000DCB                 mov     rax, [rbp+70h+var_A0]
+.text:0000000000000DCF                 mov     rax, [rax]
+.text:0000000000000DD2                 mov     [rcx+21Ch], rax
+.text:0000000000000DD9                 mov     rax, [r9]
+.text:0000000000000DDC                 mov     [rcx+214h], rax
+.text:0000000000000DE3                 mov     rax, [rbp+70h+var_48]
+.text:0000000000000DE7                 mov     rax, [rax]
+.text:0000000000000DEA                 mov     [rcx+20Ch], rax
+.text:0000000000000DF1                 mov     rax, [rbp+70h+var_58]
+.text:0000000000000DF5                 mov     rax, [rax]
+.text:0000000000000DF8                 mov     [rcx+204h], rax
+.text:0000000000000DFF                 mov     rax, [r8]
+.text:0000000000000E02                 mov     [rcx+1FCh], rax
+.text:0000000000000E09                 mov     rax, [r15]
+.text:0000000000000E0C                 mov     [rcx+1F4h], rax
+.text:0000000000000E13                 mov     rax, [r11]
+.text:0000000000000E16                 mov     [rcx+1ECh], rax
+.text:0000000000000E1D                 mov     rax, [rbx]
+.text:0000000000000E20                 mov     [rcx+1E4h], rax
+.text:0000000000000E27                 mov     rax, [r13+0]
+.text:0000000000000E2B                 mov     [rcx+1DCh], rax
+.text:0000000000000E32                 mov     rax, [rbp+70h+var_40]
+.text:0000000000000E36                 mov     rax, [rax]
+.text:0000000000000E39                 mov     [rcx+1D4h], rax
+.text:0000000000000E40                 mov     rsp, rcx
+.text:0000000000000E43                 pop     rdx
+.text:0000000000000E44                 pop     rbx
+.text:0000000000000E45                 pop     r13
+.text:0000000000000E47                 pop     rax
+.text:0000000000000E48                 pop     r14
+.text:0000000000000E4A                 popfq
+.text:0000000000000E4B                 pop     r12
+.text:0000000000000E4D                 pop     rdi
+.text:0000000000000E4E                 pop     rbp
+.text:0000000000000E4F                 pop     r8
+.text:0000000000000E51                 pop     r15
+.text:0000000000000E53                 pop     r11
+.text:0000000000000E55                 pop     rcx
+.text:0000000000000E56                 pop     rdx
+.text:0000000000000E57                 pop     r9
+.text:0000000000000E59                 pop     r10
+.text:0000000000000E5B                 pop     r13
+.text:0000000000000E5D                 pop     rsi
+.text:0000000000000E5E                 pop     rbx
+.text:0000000000000E5F                 lea     rsp, [rbp+38h]
+.text:0000000000000E63                 pop     rbx
+.text:0000000000000E64                 pop     rdi
+.text:0000000000000E65                 pop     rsi
+.text:0000000000000E66                 pop     r12
+.text:0000000000000E68                 pop     r13
+.text:0000000000000E6A                 pop     r14
+.text:0000000000000E6C                 pop     r15
+.text:0000000000000E6E                 pop     rbp
+.text:0000000000000E6F                 retn
+.text:0000000000000E6F main            endp
+.text:0000000000000E6F
+.text:0000000000000E6F _text           ends
